@@ -77,9 +77,7 @@ function initView() {
                         if (launchingAnimation) {
                             applewatch.launchingAnimationHandler(elm);
                         }
-                        setTimeout( function() {
-                            window.location.href = landingUrl;
-                        }, launchingDelay);
+                        console.log("icon cicked");
                     }
                 }
             });

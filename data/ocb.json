@@ -1,0 +1,189 @@
+{
+    "center" : {
+        "landingURL" : "",
+        "title" : "폴리팝",
+        "iconUrl" : "img/Syrup_1.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "event1" : {
+        "landingURL" : "https://egame.skmcgw.com/ocbgame14/index.html",
+        "title" : "2048",
+        "iconUrl" : "img/ocb/2048.png",
+        "status" : "terminated",
+        "badgeUrl" : "",
+        "number": "one"
+    },
+    "event2" : {
+        "landingURL" : "https://egame.skmcgw.com/ocbgame13/dev.html",
+        "title" : "폴리팝",
+        "iconUrl" : "img/ocb/polypop.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "game1" : {
+        "landingURL" : "https://egame.skmcgw.com/games/cashpang/index.html",
+        "title" : "캐시팡",
+        "iconUrl" : "img/ocb/cashpang.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+
+    },
+    "game2" : {
+        "landingURL" : "https://egame.skmcgw.com/games/gallaga/index.html",
+        "title" : "스페이스 2014",
+        "iconUrl" : "img/ocb/space2014.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+    },
+    "game3" : {
+        "landingURL" : "https://egame.skmcgw.com/games/baseball/index.html",
+        "title" : "요리조리 베이스볼",
+        "iconUrl" : "img/ocb/baseball.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "game4" : {
+        "landingURL" : "https://egame.skmcgw.com/games/cashman/index.html",
+        "title" : "캐치맨",
+        "iconUrl" : "img/ocb/cashman.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+
+
+    "test1" : {
+        "landingURL" : "https://egame.skmcgw.com/games/gallaga/index.html",
+        "title" : "스페이스 2014",
+        "iconUrl" : "img/ocb/space2014.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+    },
+    "test2" : {
+        "landingURL" : "https://egame.skmcgw.com/games/baseball/index.html",
+        "title" : "요리조리 베이스볼",
+        "iconUrl" : "img/Syrup_2.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "test3" : {
+        "landingURL" : "https://egame.skmcgw.com/games/cashman/index.html",
+        "title" : "캐치맨",
+        "iconUrl" : "img/ocb/cashman.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "test4" : {
+        "landingURL" : "https://egame.skmcgw.com/ocbgame14/index.html",
+        "title" : "2048",
+        "iconUrl" : "img/ocb/space2014.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+    },
+    "test14" : {
+        "landingURL" : "https://egame.skmcgw.com/ocbgame13/dev.html",
+        "title" : "폴리팝",
+        "iconUrl" : "img/Syrup_1.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "test15" : {
+        "landingURL" : "https://egame.skmcgw.com/games/cashpang/index.html",
+        "title" : "캐시팡",
+        "iconUrl" : "img/ocb/cashpang.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+
+    },
+    "test5" : {
+        "landingURL" : "https://egame.skmcgw.com/ocbgame13/dev.html",
+        "title" : "폴리팝",
+        "iconUrl" : "img/Syrup_1.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "test6" : {
+        "landingURL" : "https://egame.skmcgw.com/games/cashpang/index.html",
+        "title" : "캐시팡",
+        "iconUrl" : "img/ocb/cashpang.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+
+    },
+    "test7" : {
+        "landingURL" : "https://egame.skmcgw.com/games/gallaga/index.html",
+        "title" : "스페이스 2014",
+        "iconUrl" : "img/ocb/2048.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+    },
+    "test8" : {
+        "landingURL" : "https://egame.skmcgw.com/games/baseball/index.html",
+        "title" : "요리조리 베이스볼",
+        "iconUrl" : "img/Syrup_2.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+
+    "youtube1" : {
+        "landingURL" : "",
+        "title" : "youtube ad",
+        "iconUrl" : "img/video_imtheking.png",
+        "status" : "ongoing",
+        "badgeUrl" : "U8jbaGEEKMk"
+    },
+    "youtube2" : {
+        "landingURL" : "",
+        "title" : "youtube ad",
+        "iconUrl" : "img/video_coupon.png",
+        "status" : "ongoing",
+        "badgeUrl" : "fAWFX3FgwBM"
+    },
+    "youtube3" : {
+        "landingURL" : "",
+        "title" : "youtube ad",
+        "iconUrl" : "img/video_okcashbag.png",
+        "status" : "ongoing",
+        "badgeUrl" : "RZkOqrDJ_iw"
+    },
+
+    "test9" : {
+        "landingURL" : "https://egame.skmcgw.com/ocbgame14/index.html",
+        "title" : "2048",
+        "iconUrl" : "img/ocb/space2014.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+    },
+    "test10" : {
+        "landingURL" : "https://egame.skmcgw.com/ocbgame13/dev.html",
+        "title" : "폴리팝",
+        "iconUrl" : "img/Syrup_1.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "test11" : {
+        "landingURL" : "https://egame.skmcgw.com/games/cashpang/index.html",
+        "title" : "캐시팡",
+        "iconUrl" : "img/ocb/cashpang.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+
+    },
+    "test12" : {
+        "landingURL" : "https://egame.skmcgw.com/games/gallaga/index.html",
+        "title" : "스페이스 2014",
+        "iconUrl" : "img/ocb/2048.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+    },
+    "test13" : {
+        "landingURL" : "https://egame.skmcgw.com/games/baseball/index.html",
+        "title" : "요리조리 베이스볼",
+        "iconUrl" : "img/Syrup_2.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    }
+
+
+
+}

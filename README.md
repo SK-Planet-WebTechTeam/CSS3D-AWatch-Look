@@ -42,7 +42,6 @@ Coordinate caluculation Algorithms (used in core.js)
 
 Issues
 - unsmooth scaling action, especially on Android devices 
-- touchmove is only enabled on boxes. touchmove on document is blocked with the intention to prevent screen scrolling on ios devices, although the it unwillingly blocked move events when background is selected.
 
 license
 All images are SK Planet's property. Cannot be used for commercial purposes. 

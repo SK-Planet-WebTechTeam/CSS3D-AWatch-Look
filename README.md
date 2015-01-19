@@ -44,7 +44,7 @@ Issues
 - unsmooth scaling action, especially on Android devices 
 
 Project Maintainer 
-Jee Hyun Wang (jw3046@columbia.edu)
+- Jee Hyun Wang (jw3046@columbia.edu)
 
 license
-All images are SK Planet's property. Cannot be used for commercial purposes. 
+- All images are SK Planet's property. Cannot be used for commercial purposes. 

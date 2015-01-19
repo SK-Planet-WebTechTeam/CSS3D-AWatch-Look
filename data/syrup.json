@@ -1,0 +1,72 @@
+{
+
+    "event1" : {
+        "landingURL" : "https://egame.skmcgw.com/games/2048/index.html",
+        "title" : "2048",
+        "iconUrl" : "img/ocb/card_2048.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+    },
+    "event2" : {
+        "landingURL" : "https://egame.skmcgw.com/games/polypop/index.html",
+        "title" : "폴리팝",
+        "iconUrl" : "img/card_polypop.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "game1" : {
+        "landingURL" : "https://egame.skmcgw.com/games/baseball/index.html",
+        "title" : "요리조리 베이스볼",
+        "iconUrl" : "img/ocb/card_baseball.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "game2" : {
+        "landingURL" : "https://egame.skmcgw.com/games/cashman/index.html",
+        "title" : "캐치맨",
+        "iconUrl" : "img/ocb/card_cashman.png",
+        "status" : "ongoing",
+        "badgeUrl" : ""
+    },
+    "game3" : {
+        "landingURL" : "https://egame.skmcgw.com/games/cashpang/index.html",
+        "title" : "캐시팡",
+        "iconUrl" : "img/ocb/card_baseball.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+    },
+    "game4" : {
+        "landingURL" : "https://egame.skmcgw.com/games/gallaga/index.html",
+        "title" : "스페이스 2014",
+        "iconUrl" : "img/ocb/card_space2014.png",
+        "status" : "terminated",
+        "badgeUrl" : ""
+    },
+    "ad1" : {
+        "landingURL" : "",
+        "title" : "Syrup 탑 광고",
+        "iconUrl" : "",
+        "status" : "ongoing",
+        "badgeUrl" : "",
+        "youtube" : "true",
+        "isPlaing": "false"
+    },
+    "ad2" : {
+        "landingURL" : "",
+        "title" : "Syrup: 쿠폰편",
+        "iconUrl" : "",
+        "status" : "ongoing",
+        "badgeUrl" : "",
+        "youtube" : "true",
+        "isPlaing": "false"
+    },
+    "ad3" : {
+        "landingURL" : "",
+        "title" : "2048 How To",
+        "iconUrl" : "",
+        "status" : "ongoing",
+        "badgeUrl" : "",
+        "youtube" : "true",
+        "isPlaing": "false"
+    }
+}

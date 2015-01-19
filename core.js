@@ -4,16 +4,6 @@
 * for applewatch view 
 */
 
-var e = document.documentElement,
-    g = document.getElementsByTagName('body')[0],
-    windowWidth = window.innerWidth || e.clientWidth || g.clientWidth,
-    windowHeight = window.innerHeight|| e.clientHeight|| g.clientHeight;
-
-//center of the screen 
-var screenCenter = [];
-screenCenter['centerX'] = windowWidth/2.0;
-screenCenter['centerY'] = windowHeight/2.0;
-
 
 var Core = (function (window, document){
 
@@ -30,7 +20,7 @@ var Core = (function (window, document){
         this.boxMargin = this.options.boxMargin/2;
         this.applewatchOriginalPosX = $(".applewatchDiv").position().left;
         this.applewatchOriginalPosY = $(".applewatchDiv").position().top;
-
+        console.log(this.options)
         this.applewatchcoordinate = {};
 
         this.numberofboxes = this.options.boxesCount;
@@ -45,10 +35,14 @@ var Core = (function (window, document){
             this._setInitialPosition();
         }
         
+        
+
     }
 
     //********** prototype ************//
     Core.prototype = {
+
+        scaleRecord: [],
 
         //get coordinates to spread out the boxes 
         //SQUARE layout
@@ -79,16 +73,19 @@ var Core = (function (window, document){
 
         //get coordinates to spread out the boxes 
         //CIRCULAR layout 
+        //position calculated via polar coordinate calculations
         _setInitialPositionCircle: function() {
             this.coordinatesList = [];
-            var radius = this.options.boxSize + this.boxMargin;
+            var radius = this.options.boxSize + this.boxMargin; //can be changed 
             //first element
             var pts = 1;
             var angleIncrement = 360;
             var r = radius * 0;
             var p = {};
-            p.x = r * Math.cos((angleIncrement * 1) * (Math.PI / 180)) + screenCenter.centerX - radius/2; //add or subtract the distance from center
-            p.y = r * Math.sin((angleIncrement * 1) * (Math.PI / 180)) + screenCenter.centerY - radius/2;
+            p.x = r * Math.cos((angleIncrement * 1) * (Math.PI / 180)) 
+                        + this.options.screenCenter.centerX - radius/2; //add or subtract the distance from center
+            p.y = r * Math.sin((angleIncrement * 1) * (Math.PI / 180)) 
+                        + this.options.screenCenter.centerY - radius/2;
             p.z = 0;
             this.coordinatesList.push(p);         
             //rest of elements
@@ -96,13 +93,15 @@ var Core = (function (window, document){
             var level = 1;
             while (pt < this.numberofboxes) {
                 pts = 6 * level;
-                for (var n = 0; n < pts; n++) {
+                for (var n = -2; n < pts-2; n++) {
                     if (pt < this.numberofboxes) {
                         p = {};
                         r = radius * level; 
                         angleIncrement = 360 / pts;
-                        p.x = r * Math.cos((angleIncrement * n) * (Math.PI / 180)) +screenCenter.centerX - radius/2;
-                        p.y = r * Math.sin((angleIncrement * n) * (Math.PI / 180)) +screenCenter.centerY - radius/2;
+                        p.x = r * Math.cos((angleIncrement * n) * (Math.PI / 180)) 
+                                    + this.options.screenCenter.centerX - radius/2;
+                        p.y = r * Math.sin((angleIncrement * n) * (Math.PI / 180)) 
+                                    + this.options.screenCenter.centerY - radius/2;
                         p.z = 0;
                         this.coordinatesList.push(p);
                         pt += 1;
@@ -125,7 +124,7 @@ var Core = (function (window, document){
         },
 
         //calculates each elements' position and scale 
-        _setElemStyle: function (mousex, mousey) {
+        _setElemStyle: function (mousex,mousey) {
 
             //applewatch position relative to the top right of the window 
             var applewatchPosX = this.applewatchOriginalPosX +  mousex;
@@ -142,10 +141,9 @@ var Core = (function (window, document){
             var style = "";
             var loc, scalef, mvX, mvY;
 
-            //actual range = (0, Math.max(screenCenter.centerX, screenCenter.centerY))
-            //desired range = (0.8, 3.5)  **scale can be changed   
+            //desired range = (0.8, 3.0)  **scale can be changed   
             var min = 0;
-            var max = screenCenter.centerX + screenCenter.centerY;
+            var max = this.options.screenCenter.centerX + this.options.screenCenter.centerY;
             var p;
 
             this.newcoordinatesList = [];
@@ -155,18 +153,25 @@ var Core = (function (window, document){
                 y = applewatchPosY + parseFloat(this.coordinatesList[i].y); 
                 x = applewatchPosX + parseFloat(this.coordinatesList[i].x);
 
-                if (x <= screenCenter.centerX -xcenter&& y <= screenCenter.centerY - ycenter){
+                if (x <= this.options.screenCenter.centerX -xcenter 
+                    && y <= this.options.screenCenter.centerY - ycenter) {
                     //top left 
-                    scalef = Math.max(x + elemwidth , 0) + Math.max(y , 0); 
-                } else if (x <= screenCenter.centerX-xcenter && y > screenCenter.centerY - ycenter) {
+                    scalef = Math.max(x + elemwidth , 0) 
+                            + Math.max(y , 0); 
+                } else if (x <= this.options.screenCenter.centerX-xcenter 
+                    && y > this.options.screenCenter.centerY - ycenter) {
                     //bottom left 
-                    scalef = Math.max(x + elemwidth , 0) + Math.max(windowHeight - (y + elemheight) , 0);
-                } else if (x > screenCenter.centerX -xcenter && y <= screenCenter.centerY - ycenter) {
+                    scalef = Math.max(x + elemwidth , 0) 
+                            + Math.max(this.options.windowHeight - (y + elemheight) , 0);
+                } else if (x > this.options.screenCenter.centerX - xcenter 
+                    && y <= this.options.screenCenter.centerY - ycenter) {
                     //top right
-                    scalef = Math.max(windowWidth - x , 0)+ Math.max(y , 0);
+                    scalef = Math.max(this.options.windowWidth - x , 0)
+                            + Math.max(y , 0);
                 } else {
                     //bottom right
-                    scalef = Math.max(windowWidth - x , 0)+ Math.max(windowHeight-(y + elemheight) , 0); 
+                    scalef = Math.max(this.options.windowWidth - x , 0)
+                            + Math.max(this.options.windowHeight-(y + elemheight) , 0); 
                 }
 
                 if (scalef == 0) {

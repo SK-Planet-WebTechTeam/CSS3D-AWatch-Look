@@ -1,19 +1,11 @@
 /*
 * applewatchview.js
 */
-var e = document.documentElement,
-    g = document.getElementsByTagName('body')[0],
-    windowWidth = window.innerWidth || e.clientWidth || g.clientWidth,
-    windowHeight = window.innerHeight|| e.clientHeight|| g.clientHeight;
 
-//center of the screen
-var screenCenter = [];
-screenCenter['centerX'] = windowWidth/2.0;
-screenCenter['centerY'] = windowHeight/2.0;
 
 var AppleWatchView = (function (window, document) {
-    //CSS prefix, event handler 등록등 공통 기능 모음
-    //아래 util은 open source 기반
+    //CSS prefix, event handler collection 
+    //utils below is written based on open source 
     var utils = (function () {
         var me = {};
 
@@ -115,29 +107,37 @@ var AppleWatchView = (function (window, document) {
         this.boxes;
         this.boxesCount;
 
-        this.applewatch = typeof el === 'string' ? document.querySelector(el) : el;
+        this.viewport = typeof el === 'string' ? document.querySelector(el) : el;
+        
+        this.applewatch = this.viewport.children[0];
+        
+        var e = document.documentElement,
+            g = document.getElementsByTagName('body')[0];
+        this.windowWidth = window.innerWidth || e.clientWidth || g.clientWidth,
+        this.windowHeight = window.innerHeight|| e.clientHeight|| g.clientHeight;
+        //center of the screen 
+        this.screenCenter = [];
+        this.screenCenter['centerX'] = this.windowWidth/2.0;
+        this.screenCenter['centerY'] = this.windowHeight/2.0;
 
         this.options = {
             transDuration: "700ms",
-            perspective: "800px",
-            perspectiveOrigin: "80% 200px",
-            onAnimationEnd: function (){},
             eventQueueSize: 5,
-            useTransition: false, //touchend시 transition으로 momuntum scrolling 수행
+            useTransition: false, //executes momuntum scrolling with transition on touchend
             tranTimingFunc: "cubic-bezier(0.21, 0.78, 0.4, 1.02)",
             transitionThreshold: 5,
             enableOrientationEvent: false,
 
-            flatXLeftLimit: windowWidth,
-            flatXRightLimit: windowWidth - windowHeight/2,
+            flatXLeftLimit: this.windowWidth,
+            flatXRightLimit: this.windowWidth - this.windowHeight/2,
             flatYTopLimit: 150,
-            flatYBottomLimit: windowHeight - windowHeight/2,
+            flatYBottomLimit: this.windowHeight - this.windowHeight/2, 
 
-            //default values. can be changed by options param
-            boxSize: 150,
+            //default values. can be changed by options param 
+            boxSize: 150, 
             scaleLimitmin: 1.1,
-            scaleLimitmax: 3.5,
-            momentumScale: 0.4,
+            scaleLimitmax: 3.5, 
+            momentumScale: 0.4, 
             bouncedPixel: 150,
             boxMargin: 10,
             isCircularLayout: true,
@@ -153,17 +153,13 @@ var AppleWatchView = (function (window, document) {
         if (typeof this.options.applewatchY !== "undefined") {
             this.applewatchY = this.options.applewatchY;
         }
-
-        //applewatch setting
-        this.applewatch.style[utils.style.perspectiveOrigin] = this.options.perspectiveOrigin;
-
-
+        
     }
 
 
     // ***************    prototype  *************/
     AppleWatchView.prototype = {
-
+    
 
         init: function(list) {
             var item, box, i;
@@ -181,22 +177,33 @@ var AppleWatchView = (function (window, document) {
                 this.boxes[i].style.height = this.options.boxSize + "px";
             }
 
+            this.viewport.style.width = this.windowWidth + "px";
+            this.viewport.style.height = this.windowHeight + "px";
+
             core = new Core({
-                boxSize: this.options.boxSize,
-                boxesCount: this.boxesCount,
-                scaleLimitmin: this.options.scaleLimitmin,
+                boxSize: this.options.boxSize, 
+                boxesCount: this.boxesCount, 
+                scaleLimitmin: this.options.scaleLimitmin, 
                 scaleLimitmax: this.options.scaleLimitmax,
                 boxMargin: this.options.boxMargin,
                 isCircularLayout: this.options.isCircularLayout,
+                windowWidth: this.windowWidth,
+                windowHeight: this.windowHeight,
+                screenCenter: this.screenCenter,
             });
 
-            //각 box display positions
+
+            //box display positions 
             this.setInitialPosition();
-            //각 box style
+
+            //box style
             this.setElemStyle();
+
             this._initEvents();
 
         },
+
+
 
         handleEvent: function (e) {
             switch ( e.type ) {
@@ -222,12 +229,12 @@ var AppleWatchView = (function (window, document) {
 
         posRecord: {
             start: {},
-            all: [],//move 발생할때 최고 5개를 저장하여 momentum animation에서 사용
+            all: [],//save up to five when move occurs; used for momentum animation
             last: {}
         },
 
         setInitialPosition: function () {
-            //각 box display positions
+            //box display positions 
             var p, style = "";
             var xValue = -1 * this.options.boxSize;
 
@@ -244,9 +251,9 @@ var AppleWatchView = (function (window, document) {
 
         },
 
-        //transform 을 설정
+        //set transform
         setFlatPos: function(x,y){
-            //move applewatch
+            //move applewatch 
             var applewatchcoordinate = core._setFlatPos(x, y);
             var posStr = "rotateX(0deg) rotateY(0deg)";
             posStr += "translate3d("+ applewatchcoordinate.x +"px," + applewatchcoordinate.y + "px,0)";
@@ -255,7 +262,7 @@ var AppleWatchView = (function (window, document) {
 
         },
 
-        //elements' position and scale 설정
+        //set elements' position and scale
         setElemStyle: function(x,y) {
 
             var style;
@@ -271,7 +278,12 @@ var AppleWatchView = (function (window, document) {
         _initEvents: function(remove) {
             utils.addEvent(window, 'orientationchange', this);
             utils.addEvent(window, 'resize', this);
-
+            //viewport events
+            utils.addEvent(this.viewport, START_EV, this);
+            utils.addEvent(this.viewport, MOVE_EV, this);
+            utils.addEvent(this.viewport, CANCEL_EV, this);
+            utils.addEvent(this.viewport, END_EV, this);
+            //applewatchdiv events 
             utils.addEvent(this.applewatch, START_EV, this);
             utils.addEvent(this.applewatch, MOVE_EV, this);
             utils.addEvent(this.applewatch, CANCEL_EV, this);
@@ -283,7 +295,7 @@ var AppleWatchView = (function (window, document) {
 
         },
 
-        //touch 이벤트 시작
+        //touch event start 
         _start: function (e) {
             var pos;
             pos = e.touches ? e.touches[0] : e;
@@ -308,7 +320,7 @@ var AppleWatchView = (function (window, document) {
             });
         },
 
-        //touchmove 이벤트 처리. 실제 applewatch를 움직임
+        //executes touchmovee event. move applewatch
         _translate: function (e) {
             var pos,
                 x,
@@ -327,7 +339,7 @@ var AppleWatchView = (function (window, document) {
             if (this.posRecord.all.length > this.options.eventQueueSize) {
                 this.posRecord.all.shift();
             }
-
+    
             x = this.flatX - parseInt((this.posRecord.last.x - pos.pageX));
             y = this.flatY - parseInt((this.posRecord.last.y - pos.pageY));
 
@@ -385,9 +397,9 @@ var AppleWatchView = (function (window, document) {
             pageX = posRecordAll[len-1].x + dx;
             pageY = posRecordAll[len-1].y + dy;
 
-            x = this.flatX - parseInt((this.posRecord.last.x - pageX)/momentumScale); //number can be changed
+            x = this.flatX - parseInt((this.posRecord.last.x - pageX)/momentumScale); //number can be changed 
             y = this.flatY - parseInt((this.posRecord.last.y - pageY)/momentumScale);
-
+            
             utils.addEvent(this.applewatch, 'webkitTransitionEnd', this);
 
             this.setTransitionProperty(this.applewatch);

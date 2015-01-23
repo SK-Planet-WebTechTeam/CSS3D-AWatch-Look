@@ -1,6 +1,9 @@
 body{
+    background-color: black;
+    background-size:cover;
+    background-repeat: no-repeat;
+    overflow-x:hidden;
     overflow-x: hidden;
-    overflow-y: hidden;
 }
 
 
@@ -10,8 +13,6 @@ body{
     position: relative;
     height: 200px;
     width: 200px;
-
-    -webkit-transform-style: preserve-3d;
     -webkit-transform: rotateX(0deg) rotateY(0deg);
 }
 

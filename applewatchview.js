@@ -4,8 +4,8 @@
 
 
 var AppleWatchView = (function (window, document) {
-    //CSS prefix, event handler collection 
-    //utils below is written based on open source 
+    //CSS prefix, event handler collection
+    //utils below is written based on open source
     var utils = (function () {
         var me = {};
 
@@ -108,14 +108,14 @@ var AppleWatchView = (function (window, document) {
         this.boxesCount;
 
         this.viewport = typeof el === 'string' ? document.querySelector(el) : el;
-        
+
         this.applewatch = this.viewport.children[0];
-        
+
         var e = document.documentElement,
             g = document.getElementsByTagName('body')[0];
         this.windowWidth = window.innerWidth || e.clientWidth || g.clientWidth,
         this.windowHeight = window.innerHeight|| e.clientHeight|| g.clientHeight;
-        //center of the screen 
+        //center of the screen
         this.screenCenter = [];
         this.screenCenter['centerX'] = this.windowWidth/2.0;
         this.screenCenter['centerY'] = this.windowHeight/2.0;
@@ -131,13 +131,13 @@ var AppleWatchView = (function (window, document) {
             flatXLeftLimit: this.windowWidth,
             flatXRightLimit: this.windowWidth - this.windowHeight/2,
             flatYTopLimit: 150,
-            flatYBottomLimit: this.windowHeight - this.windowHeight/2, 
+            flatYBottomLimit: this.windowHeight - this.windowHeight/2,
 
-            //default values. can be changed by options param 
-            boxSize: 150, 
+            //default values. can be changed by options param
+            boxSize: 150,
             scaleLimitmin: 1.1,
-            scaleLimitmax: 3.5, 
-            momentumScale: 0.4, 
+            scaleLimitmax: 3.5,
+            momentumScale: 0.4,
             bouncedPixel: 150,
             boxMargin: 10,
             isCircularLayout: true,
@@ -153,13 +153,13 @@ var AppleWatchView = (function (window, document) {
         if (typeof this.options.applewatchY !== "undefined") {
             this.applewatchY = this.options.applewatchY;
         }
-        
+
     }
 
 
     // ***************    prototype  *************/
     AppleWatchView.prototype = {
-    
+
 
         init: function(list) {
             var item, box, i;
@@ -181,9 +181,9 @@ var AppleWatchView = (function (window, document) {
             this.viewport.style.height = this.windowHeight + "px";
 
             core = new Core({
-                boxSize: this.options.boxSize, 
-                boxesCount: this.boxesCount, 
-                scaleLimitmin: this.options.scaleLimitmin, 
+                boxSize: this.options.boxSize,
+                boxesCount: this.boxesCount,
+                scaleLimitmin: this.options.scaleLimitmin,
                 scaleLimitmax: this.options.scaleLimitmax,
                 boxMargin: this.options.boxMargin,
                 isCircularLayout: this.options.isCircularLayout,
@@ -193,7 +193,7 @@ var AppleWatchView = (function (window, document) {
             });
 
 
-            //box display positions 
+            //box display positions
             this.setInitialPosition();
 
             //box style
@@ -234,7 +234,7 @@ var AppleWatchView = (function (window, document) {
         },
 
         setInitialPosition: function () {
-            //box display positions 
+            //box display positions
             var p, style = "";
             var xValue = -1 * this.options.boxSize;
 
@@ -253,7 +253,7 @@ var AppleWatchView = (function (window, document) {
 
         //set transform
         setFlatPos: function(x,y){
-            //move applewatch 
+            //move applewatch
             var applewatchcoordinate = core._setFlatPos(x, y);
             var posStr = "rotateX(0deg) rotateY(0deg)";
             posStr += "translate3d("+ applewatchcoordinate.x +"px," + applewatchcoordinate.y + "px,0)";
@@ -269,7 +269,7 @@ var AppleWatchView = (function (window, document) {
             var newstyleList = core._setElemStyle(x,y);
             for (i=0; i<newstyleList.length; i++) {
                 p = newstyleList[i];
-                style = "translate3d(" + p.x + "px," + p.y +"px, 0px) scale(" + p.scale + ", " + p.scale + ")";
+                style = "translate3d(" + parseInt(p.x) + "px," + parseInt(p.y) +"px, 0px) scale(" + parseInt(p.scale*100)/100 + ", " + parseInt(p.scale*100)/100 + ")";
                 this.boxes[i].style[utils.style.transform] = style;
             }
 
@@ -283,7 +283,7 @@ var AppleWatchView = (function (window, document) {
             utils.addEvent(this.viewport, MOVE_EV, this);
             utils.addEvent(this.viewport, CANCEL_EV, this);
             utils.addEvent(this.viewport, END_EV, this);
-            //applewatchdiv events 
+            //applewatchdiv events
             utils.addEvent(this.applewatch, START_EV, this);
             utils.addEvent(this.applewatch, MOVE_EV, this);
             utils.addEvent(this.applewatch, CANCEL_EV, this);
@@ -295,7 +295,7 @@ var AppleWatchView = (function (window, document) {
 
         },
 
-        //touch event start 
+        //touch event start
         _start: function (e) {
             var pos;
             pos = e.touches ? e.touches[0] : e;
@@ -339,7 +339,7 @@ var AppleWatchView = (function (window, document) {
             if (this.posRecord.all.length > this.options.eventQueueSize) {
                 this.posRecord.all.shift();
             }
-    
+
             x = this.flatX - parseInt((this.posRecord.last.x - pos.pageX));
             y = this.flatY - parseInt((this.posRecord.last.y - pos.pageY));
 
@@ -397,9 +397,9 @@ var AppleWatchView = (function (window, document) {
             pageX = posRecordAll[len-1].x + dx;
             pageY = posRecordAll[len-1].y + dy;
 
-            x = this.flatX - parseInt((this.posRecord.last.x - pageX)/momentumScale); //number can be changed 
+            x = this.flatX - parseInt((this.posRecord.last.x - pageX)/momentumScale); //number can be changed
             y = this.flatY - parseInt((this.posRecord.last.y - pageY)/momentumScale);
-            
+
             utils.addEvent(this.applewatch, 'webkitTransitionEnd', this);
 
             this.setTransitionProperty(this.applewatch);
